@@ -9,9 +9,14 @@ class ArticlesController < ApplicationController
 
   def new
     @article = Article.new
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
-  def create
+  def create 
+
     @article = Article.new(article_params)
     if @article.save
       redirect_to @article
@@ -20,17 +25,16 @@ class ArticlesController < ApplicationController
     end
   end
 
-  def edit
-    @article = Article.find(params[:id])
-  end
-
   def update
     @article = Article.find(params[:id])
-
     if @article.update(article_params)
       redirect_to @article
     else
       render :edit
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
   end
 
@@ -41,8 +45,17 @@ class ArticlesController < ApplicationController
     redirect_to root_path
   end
 
-  private
-    def article_params
-      params.require(:article).permit(:title, :status, :body)
+  def edit
+    @article = Article.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.js
     end
+  end
+  
+  private
+
+  def article_params
+    params.require(:article).permit(:title, :status, :body)
+  end
 end

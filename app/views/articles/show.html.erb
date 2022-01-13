@@ -1,10 +1,22 @@
-<h1><%= @article.title %></h1>
-<p><%= @article.body %></p>
-
-
-<ul>
-  <li><%= link_to "Edit", edit_article_path(@article) %></li>
-  <li><%= link_to "Destroy", article_path(@article),
-                  method: :delete,
-                  data: { confirm: "Are you sure?" } %></li>
-</ul>
+<div class="content">
+  <div class="container clearfix">
+     <div class="col-md-20 configdiv">
+      <div class=" w-100 p-5" style="background-color: #eee;">
+        <table class="table table-dark">
+          <tbody>
+            <th scope="row"><h1><%= @article.title %></h1></th> 
+            <tr>
+            <td><p><%= @article.body %></p>
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <%= link_to "Editar", edit_article_path(@article), remote: true, class: "btn btn-light" %>
+               <%= link_to "Apagar", article_path(@article), class: "btn btn-light",
+                method: :delete,
+                data: { confirm: "Tem certeza disso?" } %>
+              </div>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

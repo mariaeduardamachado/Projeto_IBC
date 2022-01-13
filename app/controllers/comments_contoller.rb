@@ -10,16 +10,16 @@ class CommentsController < ApplicationController
       @comment = @article.comments.find(params[:id])
       @comment.destroy
       redirect_to article_path(@article)
+      @comment = @article.comments.id(params[:id])
     end
   
     private
       def comment_params
-        params.require(:comment).permit(:commenter, :body)
+        params.require(:comment).permit(:commenter, :id, :body)
       end
   end
   
   http_basic_authenticate_with name: "dhh", password: "secret", only: :destroy
-
   def create
     @article = Article.find(params[:article_id])
     # ...
